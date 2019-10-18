@@ -1,0 +1,60 @@
+.modalWin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width:80%;
+  height:80%;
+  max-width:600px;
+  max-height:800px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  text-align: left;
+  color: #f9f9f9;
+  background:rgba(0,0,0,0.95);
+  padding:20px;
+
+  :global {
+    .mdTitle {
+      display:block;
+      font-size:32px;
+      padding-bottom:24px;
+      
+    }
+
+    .mdContent {
+      
+    }
+
+    .mdControls {
+      width:100%;
+      display:flex;
+      margin:0px;
+      .mdButton{
+        width:auto;
+        flex-grow: 1;
+        margin:0px 12px;
+        height:32px;
+        background:#222;
+        cursor:pointer;
+        outline:none;
+        border:none;
+        color:#fff;
+        &:hover {
+          background:#333;
+        }
+        &:active {
+          background:#428;
+        }
+        &:first-child {
+          margin-left:0;
+        }
+        &:last-child {
+          margin-right:0;
+        }
+      }
+      
+    }
+
+  }
+}
