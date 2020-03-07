@@ -4,6 +4,7 @@ import EditorBody from './EditorBody.style'
 import LPageControls from '@/components/PageBody/LPageControls';
 import ExplorerPanel from '@/components/PageBody/ExplorerPanel';
 import FileExplorerContainer from '@/containers/FileExplorer';
+import ModalContainer from '@/containers/ModalContainer';
 import ProjectsPage from '@/containers/ProjectsPage';
 
 import CodeEditorPanel from '@/containers/CodeEditorPanel';
@@ -26,6 +27,7 @@ const EditorPageProject = ({dispatch, editorPageSlug})=>{
         <FileExplorerContainer />
       </ExplorerPanel>
       <CodeEditorPanel />
+      <ModalContainer />
 
     </EditorBody>
   );
@@ -41,6 +43,7 @@ const HomePageProject = ({dispatch, editorPageSlug})=>{
       <ProjectsPage 
 
       />
+      <ModalContainer />
     </EditorBody>
   );
 }

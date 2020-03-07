@@ -29,14 +29,11 @@ const p = {
 
 export async function compileProject(passCode, project){
 
-
-  console.log("pObj")
   const pObj = {
     name: project.title,
     files:[],
     schema_version: 1
   }
-  console.log(project)
   pObj.files = project.files.map(f=>{
     const pt=f.path.split("/");
     if(pt.length!==2||(pt[0]!=='src'&&pt[0]!=='include'&&pt[0]!=='ricardian')){
@@ -48,7 +45,6 @@ export async function compileProject(passCode, project){
       content:getFile(f.id)
     };
   }).filter(x=>x&&x.name.length&&x.type.length);
-  console.log(pObj)
   if(!pObj.files.length) {
     throw new Error("No files to compile!");
   }

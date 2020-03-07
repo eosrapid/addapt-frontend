@@ -23,10 +23,8 @@ const onAction = (path, action)=>{
 
 const FileExplorerCon = ({dispatch, files, activePath})=>{
   const tree = buildFileTree(files);
-  console.log(files, tree);
 
   const onAction = (path, action)=>{
-    console.log(path, action)
     if(action==="add_file"){
       return mConfirmCB("Please enter a name for your new file", (err, res)=>{
         if(err||!res||!res.length){

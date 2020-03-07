@@ -7,7 +7,8 @@ module.exports = function override(config, env) {
   config.resolve.alias['@'] = path.resolve(__dirname, 'src');
 
   const monacoWebpack = new MonacoWebpackPlugin({
-    languages: ['cpp']
+    languages: ['cpp'],
+    features: ['!gotoSymbol'],
   })
   if(config.plugins){
     config.plugins = config.plugins.concat([monacoWebpack]);

@@ -1,0 +1,14 @@
+.ideInput {
+  font-family: inherit;
+  font-size:16px;
+  padding:8px 6px;
+  outline:none;
+  border: 2px solid rgb(5, 44, 74);
+  color:#333;
+  background:#fff;
+  &:focus {
+    color:#111;
+    border-color:rgb(54, 54, 205);
+  }
+
+}

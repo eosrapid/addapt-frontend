@@ -24,7 +24,7 @@ const EOS_MAINNET_NODES = [
 const EOS_JUNGLE_NODES = [
   {
     network_id: "JUNGLE",
-    host:'api.jungle.alohaeos.com:',
+    host:'api.jungle.alohaeos.com',
     port:443,
     protocol:'https'
   },

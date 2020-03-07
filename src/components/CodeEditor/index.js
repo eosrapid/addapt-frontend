@@ -40,7 +40,6 @@ export default class CodeEditor extends React.Component {
     const options = {
       selectOnLineNumbers: true
     };
-    console.log(this.props.fileId)
     return (
       <MonacoEditor
         width="100%"

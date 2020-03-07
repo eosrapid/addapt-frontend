@@ -46,7 +46,6 @@ export function renameProjectFile(pid, fileId, newName){
   }
   file.path = resolvePath("/",file.path.substring(0,file.path.lastIndexOf("/")+1),newName).substring(1);
 
-  console.log(newName,file.path)
   setJSONKey(pid, project);
   return project;
 }

@@ -9,7 +9,14 @@ import {
   addProject,
   renameProject
 } from '@/utils/dataStore/project';
-import {downloadText} from '@/utils/download'
+import {
+  setLastBuildResult,
+  getLastBuildResult
+} from '@/utils/dataStore/lastBuildResult';
+
+import {deployContract} from '@/utils/eos';
+
+import {downloadText, downloadHex} from '@/utils/download'
 import {openLoading, closeLoading, mConfirmPromise} from '@/utils/modalConfirm';
 import {compileProject} from '@/utils/api/compile';
 
@@ -83,22 +90,45 @@ export default {
         }catch(e){}
       }
     },
+    *downloadProject({payload}, {select, call, put}) {
+      const currentProjectId = yield select(({ project }) => project.currentProjectId);
+      const targetPid = payload || currentProjectId;
+      try {
+        const proj = getProject(targetPid)
+        const lastBuildResult = getLastBuildResult();
+        downloadText(proj.title+".abi.json", lastBuildResult.abiStr);
+        downloadHex(proj.title+".wasm", lastBuildResult.wasmHex);
+
+      }catch(err){
+        console.error(err);
+      }
+    },
+    *publishProject({payload}, {select, call, put}) {
+      try {
+        const lastBuildResult = getLastBuildResult();
+        yield call(deployContract, Object.assign({},{abiString: lastBuildResult.abiStr, wasmHex:lastBuildResult.wasmHex},payload||{}));
+      }catch(err){
+        console.error(err);
+      }
+    },
     *compileProject({payload}, { select, call, put }) {
       const currentProjectId = yield select(({ project }) => project.currentProjectId);
       const targetPid = payload || currentProjectId;
-      console.log("test")
 
       try {
         const proj = getProject(targetPid)
         const passCode = yield call(getServerPasscode);
         openLoading("Please wait while your contract is compiled...");
         const compileResult = yield call(compileProject, passCode, proj);
-        console.log("GOTRES: ",compileResult);
-        downloadText(proj.title+".abi.json", compileResult.abi);
-        downloadText(proj.title+".wasm", compileResult.wasm);
+        setLastBuildResult(compileResult.wasm, compileResult.abi);
         closeLoading();
+        yield put({type: "modal/openModal", payload: {id: "build_success"}});
+
       }catch(e){
         console.error(e);
+        const errMsg = (e&&e.response&&e.response.data&&(e.response.data.error||e.response.data.message))?(e.response.data.error||e.response.data.message):(e+"");
+        yield put({type: "modal/openModal", payload: {id: "build_error", data:errMsg}});
+
         try{
           closeLoading();
         }catch(e){}
@@ -203,7 +233,6 @@ export default {
       };
     },
     openFile(state, { payload }) {
-      console.log("openFile/"+payload)
       return {
         ...state,
         editingFileId: payload,

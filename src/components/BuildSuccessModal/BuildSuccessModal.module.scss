@@ -1,0 +1,9 @@
+.buildSuccessModal {
+  font-size:inherit;
+
+  :global {
+    .modalDescription {
+      margin-bottom:12px;
+    }
+  }
+}

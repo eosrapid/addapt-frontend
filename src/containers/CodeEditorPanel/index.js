@@ -8,7 +8,6 @@ import {buildFileTree, FileListItem} from '@/utils/fileUtils/structure';
 
 const CodeEditorPanelCon = ({dispatch, tabs, activeTab})=>{
   const onAction = (id, action)=>{
-    console.log([id, action])
     if(action==="click"){
       dispatch({
         type: "project/openFile",
@@ -22,7 +21,6 @@ const CodeEditorPanelCon = ({dispatch, tabs, activeTab})=>{
     }
 
   }
-  console.log([tabs,activeTab])
 
   return(
     <CodeEditorPanel

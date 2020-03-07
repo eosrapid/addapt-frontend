@@ -1,8 +1,8 @@
 import router from './router';
 
 import dva from 'dva';
-
 import './global.scss';
+import 'my-eos/dist/my-eos.css';
 import '@/assets/fonts/blinker-v1-latin/blinker-v1-latin.css';
 import '@/assets/fonts/foundation-icons/foundation-icons.css';
 import projectModel from '@/models/project';
